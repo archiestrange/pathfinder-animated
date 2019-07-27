@@ -72,16 +72,20 @@ body {
         display: none;
     }
 
-    .first-select:hover{
-        box-shadow: 1px 1px 2px 2px #3fdc54;
-        background-color: #3fdc54;
-        transition: background-color .5s, box-shadow .5s;
+    .first-select{
+        &:hover{
+            box-shadow: 1px 1px 2px 2px #3fdc54;
+            background-color: #3fdc54;
+            transition: background-color .5s, box-shadow .5s;
+        }
     }
 
-    .second-select:hover {
-        box-shadow: 1px 1px 2px 2px #FF4500;
-        background-color: #FF4500;
-        transition: background-color .5s, box-shadow .5s;
+    .second-select{
+        &:hover {
+            box-shadow: 1px 1px 2px 2px #FF4500;
+            background-color: #FF4500;
+            transition: background-color .5s, box-shadow .5s;
+        }
     }
 
     > .squeeze-row{
@@ -107,5 +111,97 @@ body {
         > .wide-right-section{
             float: right;
         }
+    }
+}
+
+
+#result-view-container {
+    padding-top: 150px;
+    justify-content: center;
+    display: flex;
+
+    .wrapper {
+        display: inline-block;
+        width: 135px;
+        margin: 25px;
+    }
+
+    .middle {
+        font-family: arial;
+        font-size: 16px;
+        position: relative;
+        margin-top: 5px;
+        margin-left: 5px;
+        line-height: 131px;
+        z-index: 3;
+        border-radius: 50%;
+        background-color: #F7ECE1;
+        text-align: center;
+        user-select: none;
+        cursor: pointer;
+    }
+    
+    .popover {
+        background: #202020;
+        width: 78px;
+        height: 162px;
+        position: relative;
+        top: -150px;
+        left: -10px;
+        opacity: 0;
+        z-index: 2;
+        animation: popover 500ms linear;
+    }
+
+    @keyframes popover {
+        0% {opacity: 1;}
+        99%{opacity:1;}
+        100% {opacity:0;}
+    }  
+
+    .right {
+        border: #3f85a3 solid 5px;
+        height: 130px;
+        width: 130px;
+        border-radius: 50%;
+        border-top-color: transparent;
+        border-left-color: transparent;
+        position: absolute;
+        transform: rotate(-45deg);
+        animation: rota2 500ms linear;
+    }
+
+    @keyframes rota2 {
+        from{ transform:rotate(-225deg);}
+        to { transform: rotate(-45deg);}
+    }
+
+    .left {
+        border: #3f85a3 solid 5px;
+        height: 130px;
+        width: 130px;
+        border-radius: 50%;
+        border-bottom-color: transparent;
+        border-right-color: transparent;
+        position: absolute;
+        transform: rotate(315deg);
+        animation: rota 1000ms linear;
+    }
+
+    @keyframes rota {
+        from {transform: rotate(-45deg);}
+        to { transform: rotate(315deg);}
+    }
+
+    .green {
+        background-color: #3fdc54;
+    }
+
+    .orange {
+        background-color: #f89d13;
+    }
+
+    .red {
+        background-color: #FF4500;
     }
 }

@@ -52,7 +52,7 @@ export class GraphicalUI extends React.Component<ComponentProps> {
 
     setSiteInfo(destination: Destination) {
         if(this.props.siteA) {
-            if (this.props.siteB) {
+            if (this.props.siteB || destination === this.props.siteA) {
                 return;
             } else {
                 this.props.updateInputB(destination);

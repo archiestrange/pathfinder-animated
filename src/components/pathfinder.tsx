@@ -4,6 +4,7 @@ import { Destination, CalculationResult, CalculationItem } from '../types';
 import { Calculate } from '../functions/calculate-route';
 import { convertResultToStringArray } from '../functions/utils';
 import { GraphicalUI } from './graphical-ui';
+import { ResultView } from './result-view';
 
 interface ComponentProps {}
 
@@ -17,7 +18,7 @@ interface LocalState {
 const initialState: LocalState = {
   siteA: undefined,
   siteB: undefined,
-  result: undefined,  
+  result: undefined,
   bestResult: undefined
 };
 
@@ -73,18 +74,27 @@ export class Pathfinder extends React.Component<ComponentProps, LocalState> {
     this.setState(initialState);
   }
 
+  renderUI () {
+    if(this.state.bestResult) {
+      return <ResultView
+        result={this.state.bestResult} />
+    } else {
+      return <GraphicalUI
+        siteA={this.state.siteA}
+        siteB={this.state.siteB}
+        calculate={this.calculate}
+        updateInputA={this.updateInputA}
+        updateInputB={this.updateInputB}
+        result={this.state.bestResult} />
+    }
+  }
+
   render() {
     return <div>
       <div id="toolbar">
         <button onClick={this.reset}>Reset</button>
       </div>
-      <GraphicalUI
-          siteA={this.state.siteA}
-          siteB={this.state.siteB}
-          calculate={this.calculate}
-          updateInputA={this.updateInputA}
-          updateInputB={this.updateInputB}
-          result={this.state.bestResult} />
+      {this.renderUI()}
     </div>
   }
 }
