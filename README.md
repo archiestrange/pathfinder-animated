@@ -1,9 +1,9 @@
-# Pathfinder
+# Pathfinder Animated
 Use a calculator to find the shortest path between two points
 
 ## How to run:
 In your terminal run: <br />
-- git clone https://github.com/archiestrange/pathfinder-graphical.git <br />
+- git clone https://github.com/archiestrange/pathfinder-animated.git <br />
 - cd pathfinder-graphical
 - npm i
 - npm run start
@@ -11,4 +11,4 @@ In your terminal run: <br />
 - (optional) npm test
 
 # Rundown
-This is more visual version of the pathfinder project.
+An animated and final version of the pathfinder.
