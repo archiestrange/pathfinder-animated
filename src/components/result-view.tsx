@@ -12,17 +12,17 @@ export class ResultView extends React.Component<ComponentProps> {
         let time: number = 0;
         const routes = this.props.result.usedRoutes;
         return <React.Fragment>
-            <ResultOrb wait={time} colour="green" destination={routes[0].start} />
+            <ResultOrb route={this.props.result} wait={time} optionsWait={time + 1000} colour="green" destination={routes[0].start} />
             {
                 routes.map((r, idx) => {
                     if (idx === 0) {
                         return null;
                     }
-                    time = (1250 * idx);
-                    return <ResultOrb key={r.start} wait={time} colour={"orange"} destination={r.start} />
+                    time = (2250 * idx);
+                    return <ResultOrb route={this.props.result}  key={r.start} wait={time} optionsWait={time + 1000} colour={"orange"} destination={r.start} />
                 })
             }
-            <ResultOrb wait={time + 1250} colour="red" destination={this.props.result.current} />
+            <ResultOrb route={this.props.result}  wait={time + 2250} optionsWait={time + 1000} colour="red" destination={this.props.result.current} />
         </React.Fragment>
     }
 
