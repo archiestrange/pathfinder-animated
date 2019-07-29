@@ -1,6 +1,6 @@
 import { CalculationItem, Destination, CalculationResult } from "../types";
 
-export const destinations = Object.keys(Destination).map(d => Destination[d as any]);
+export const destinations = Object.keys(Destination).map(d => Destination[d as any]) as Destination[];
 
 export function convertResultToStringArray(result: CalculationItem[]): CalculationResult[] {
     const resultText: CalculationResult[] = [];

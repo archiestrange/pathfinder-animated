@@ -5,6 +5,8 @@ import { Calculate } from '../functions/calculate-route';
 import { convertResultToStringArray } from '../functions/utils';
 import { GraphicalUI } from './graphical-ui';
 import { ResultView } from './result-view';
+import { Button } from 'reactstrap';
+import { ConnectionsInfo } from './connections-info';
 
 interface ComponentProps {}
 
@@ -13,13 +15,15 @@ interface LocalState {
   siteB?: Destination;
   result?: CalculationResult[];
   bestResult?: CalculationItem;
+  connectionsInfoDisplay: boolean;
 }
 
 const initialState: LocalState = {
   siteA: undefined,
   siteB: undefined,
   result: undefined,
-  bestResult: undefined
+  bestResult: undefined,
+  connectionsInfoDisplay: false
 };
 
 export class Pathfinder extends React.Component<ComponentProps, LocalState> {
@@ -32,6 +36,7 @@ export class Pathfinder extends React.Component<ComponentProps, LocalState> {
     this.updateInputA = this.updateInputA.bind(this);
     this.updateInputB = this.updateInputB.bind(this);
     this.handleWindowResize = this.handleWindowResize.bind(this);
+    this.toggleConnectionsInfoDisplay = this.toggleConnectionsInfoDisplay.bind(this);
   }
   
   handleWindowResize() {
@@ -75,6 +80,9 @@ export class Pathfinder extends React.Component<ComponentProps, LocalState> {
   }
 
   renderUI () {
+    if (this.state.connectionsInfoDisplay) {
+      return ConnectionsInfo();
+    }
     if(this.state.bestResult) {
       return <ResultView
         result={this.state.bestResult} />
@@ -89,10 +97,16 @@ export class Pathfinder extends React.Component<ComponentProps, LocalState> {
     }
   }
 
+  toggleConnectionsInfoDisplay() {
+    const connectionsInfoDisplay = !this.state.connectionsInfoDisplay;
+    this.setState({ ...initialState, connectionsInfoDisplay });
+  }
+
   render() {
     return <div>
       <div id="toolbar">
-        <button onClick={this.reset}>Reset</button>
+        <Button onClick={this.reset}>Reset</Button>
+        <Button style={{ marginLeft: "15px" }} onClick={this.toggleConnectionsInfoDisplay}>View</Button>
       </div>
       {this.renderUI()}
     </div>

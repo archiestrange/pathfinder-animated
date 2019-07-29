@@ -6,13 +6,15 @@ body {
     position: fixed;
     z-index: 999;
     width: 100%;
-    text-align: center;
+    display: flex;
+    justify-content: center;
     > button{
         background-color: #aeaeae;
         border: none;
         border-radius: 3px;
         color: white;
-        padding: 8px 20px;
+        padding: 8px 15px;
+        width: 100px;
         text-align: center;
         text-decoration: none;
         display: inline-block;
@@ -114,35 +116,57 @@ body {
     }
 }
 
+#connections-info-container {
+    padding-top: 75px;
+    width: 100%;
+    align-content: center;
+    font-family: Arial;
+    > table {
+        border: 1px solid white;
+        border-radius: 3px;
+        padding: 15px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: #aeaeae;
+        > thead {
+            text-align: left;
+        }
+        > tbody {
+            > tr {
+                > td {
+                    padding: 5px;
+                    min-width: 100px;
+                }
+            }
+        }
+    }
+}
 
 #result-view-container {
-    padding-top: 150px;
-    justify-content: center;
-    display: flex;
-    vertical-align: middle;
+    padding-top: 75px;
+    width: 100%;
+    align-content: center;
     
-
     .possible-destinations-container{
-        vertical-align: middle;
-        height: 400px;
+        display: flex;
+        justify-content: center;
     }
 
     .wrapper {
-        height: calc(100vh - 200px);
-        display: inline-block;
-        width: 135px;
-        margin: 25px;
-        margin-top: auto;
-        margin-bottom: auto;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 35px;
+        width: 75px;
+        height: 75px;
     }
 
     .middle {
         font-family: arial;
         font-size: 16px;
+        top: 2.5px;
+        left: 2px;
         position: relative;
-        margin-top: 5px;
-        margin-left: 5px;
-        line-height: 131px;
+        line-height: 75px;
         z-index: 3;
         border-radius: 50%;
         background-color: #F7ECE1;
@@ -153,15 +177,14 @@ body {
     
     .popover {
         background: #202020;
-        width: 78px;
-        height: 162px;
+        width: 75px;
+        height: 85px;
+        top: -75px;
+        left: -35px;
         position: relative;
-        top: -150px;
-        left: -10px;
         opacity: 0;
         z-index: 2;
         animation: popover 500ms linear;
-        text-align: center;
     }
 
     @keyframes popover {
@@ -172,8 +195,8 @@ body {
 
     .right {
         border: #fff solid 5px;
-        height: 130px;
-        width: 130px;
+        height: 70px;
+        width: 70px;
         border-radius: 50%;
         border-top-color: transparent;
         border-left-color: transparent;
@@ -190,8 +213,8 @@ body {
 
     .left {
         border: #fff solid 5px;
-        height: 130px;
-        width: 130px;
+        height: 70px;
+        width: 70px;
         border-radius: 50%;
         border-bottom-color: transparent;
         border-right-color: transparent;
@@ -221,7 +244,8 @@ body {
     }
 
     .destination-orb {
-       margin: 15px;
+        margin-left: 15px;
+        margin-right: 15px;
         animation: fadein .5s;
     }
 
