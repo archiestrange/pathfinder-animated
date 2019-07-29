@@ -12,11 +12,10 @@ const renderDestinationConnections = () => {
                 ).join(" | ")}
             </td>
         </tr>
-    )
+    );
 }
 
 export function ConnectionsInfo() {
-
     return <div id="connections-info-container">
         <table>
             <thead>

@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Destination, CalculationItem } from "../types";
-import { ConnectingLines } from "./connecting-lines";
 import { getOrbIdValue } from "../functions/utils";
 
 interface ComponentProps {
@@ -108,9 +107,6 @@ export class GraphicalUI extends React.Component<ComponentProps> {
                     onClick={() => this.setSiteInfo(Destination.H)}>H</div>
 
             </div>
-
-            {ConnectingLines(this.props.result)}
-
         </div>
     }
 }

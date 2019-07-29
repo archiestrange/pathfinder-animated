@@ -1,6 +1,5 @@
 import * as React from "react";
-import { Destination, CalculationItem } from "../types";
-import { getConnectingRoutes } from "../functions/get-connection-routes";
+import { Destination } from "../types";
 import { routesAvailable } from "../functions/get-available-routes";
 
 interface ComponentProps {

@@ -5,7 +5,6 @@ import { Calculate } from '../functions/calculate-route';
 import { convertResultToStringArray } from '../functions/utils';
 import { GraphicalUI } from './graphical-ui';
 import { ResultView } from './result-view';
-import { Button } from 'reactstrap';
 import { ConnectionsInfo } from './connections-info';
 
 interface ComponentProps {}
@@ -105,8 +104,8 @@ export class Pathfinder extends React.Component<ComponentProps, LocalState> {
   render() {
     return <div>
       <div id="toolbar">
-        <Button onClick={this.reset}>Reset</Button>
-        <Button style={{ marginLeft: "15px" }} onClick={this.toggleConnectionsInfoDisplay}>View</Button>
+        <button onClick={this.reset}>Reset</button>
+        <button style={{ marginLeft: "15px" }} onClick={this.toggleConnectionsInfoDisplay}>View</button>
       </div>
       {this.renderUI()}
     </div>

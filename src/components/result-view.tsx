@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Destination, CalculationItem } from "../types";
+import { CalculationItem } from "../types";
 import { ResultOrb } from "./result-orb";
 
 interface ComponentProps {
