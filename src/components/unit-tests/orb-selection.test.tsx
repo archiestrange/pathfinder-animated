@@ -7,10 +7,11 @@ configure({adapter: new Adapter()});
 
 describe("Orb Selection", () => {
 
+    const pathfinderComponent = (
+        <Pathfinder />
+    );
+
     it("Orb A renders with class 'green' when selected first", () => {
-        const pathfinderComponent = (
-            <Pathfinder />
-        );
 
         const component = mount(pathfinderComponent);
 
@@ -25,4 +26,20 @@ describe("Orb Selection", () => {
         expect(orbAPostUpdate.hasClass("green")).toEqual(true);
     });
 
+    it("Orb container hides after view switch", () => {
+
+        const component = mount(pathfinderComponent);
+
+        const orbContainer = component.find("div#graphical-pathfinder-container");
+        expect(orbContainer.exists()).toEqual(true);
+
+        const viewSwitcher = component.find("button#view-switcher");
+        viewSwitcher.simulate("click");
+
+        component.update();
+
+        const orbContainerPostUpdate = component.find("div#graphical-pathfinder-container");
+        expect(orbContainerPostUpdate.exists()).toEqual(false);
+    });
+    
 });

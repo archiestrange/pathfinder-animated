@@ -11,18 +11,21 @@ export class ResultView extends React.Component<ComponentProps> {
     renderResults(): JSX.Element {
         let time: number = 0;
         const routes = this.props.result.usedRoutes;
-        return <React.Fragment>
-            <ResultOrb wait={time} nextUsed={routes[0].end} optionsWait={time + 1000} colour="green" destination={routes[0].start} />
-            {
-                routes.map((r, idx) => {
-                    if (idx === 0) {
-                        return null;
-                    }
-                    time = (3000 * idx);
-                    return <ResultOrb key={r.start} wait={time} optionsWait={time + 1000} colour={"orange"} destination={r.start} nextUsed={r.end} />
-                })
+
+        const resultOrbs = (): JSX.Element[] => routes.map((r, idx) => {
+            // First route 
+            if (idx === 0) {
+                return <ResultOrb key={r.start} wait={time} nextUsed={routes[0].end} colour="green" destination={routes[0].start} />
             }
-            <ResultOrb wait={time + 3000} optionsWait={0} colour="red" destination={this.props.result.current} />
+
+            // Update time delay each iteration
+            time = (3000 * idx);
+            return <ResultOrb key={r.start} wait={time} colour={"orange"} destination={r.start} nextUsed={r.end} />
+        });
+
+        return <React.Fragment>
+            {resultOrbs()}
+            <ResultOrb wait={time + 3000} colour="red" destination={this.props.result.current} />
         </React.Fragment>
     }
 

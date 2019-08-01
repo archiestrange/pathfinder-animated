@@ -45,7 +45,7 @@ export class Pathfinder extends React.Component<ComponentProps, LocalState> {
   }
 
   componentWillMount(){
-    // Stop fixed svg lines moving out of place on window resize
+    // Reset on screen resize to handle changes to layout
     window.addEventListener("resize", this.handleWindowResize);
   }
 
@@ -57,20 +57,22 @@ export class Pathfinder extends React.Component<ComponentProps, LocalState> {
   }
 
   // Handle selection of first orb
-  updateInputA(siteA: Destination): void {
+  updateInputA(siteA: Destination) {
     this.setState({ siteA });
   }
   
   // Handle selection of second orb
-  updateInputB(siteB: Destination): void {
+  updateInputB(siteB: Destination) {
     this.setState({ siteB });
   }
 
   // Calculate the shortest path between the two selected routes
-  calculate(): void {
+  calculate() {
     const { siteA, siteB } = this.state;
-    const result = Calculate(siteA!, siteB!);
-    this.setState({ result: convertResultToStringArray(result), bestResult: result[0] });
+    const result: CalculationItem[] = Calculate(siteA!, siteB!);
+    // Best result will always be index 0 as it is a sorted array
+    const bestResult: CalculationItem = result[0];
+    this.setState({ result: convertResultToStringArray(result), bestResult });
   }
 
   // Set state back to original state
@@ -78,35 +80,49 @@ export class Pathfinder extends React.Component<ComponentProps, LocalState> {
     this.setState(initialState);
   }
 
-  renderUI () {
-    if (this.state.connectionsInfoDisplay) {
-      return ConnectionsInfo();
-    }
-    if(this.state.bestResult) {
-      return <ResultView
-        result={this.state.bestResult} />
-    } else {
-      return <GraphicalUI
-        siteA={this.state.siteA}
-        siteB={this.state.siteB}
-        calculate={this.calculate}
-        updateInputA={this.updateInputA}
-        updateInputB={this.updateInputB}
-        result={this.state.bestResult} />
-    }
-  }
-
+  // Reset state and display table of connection content
   toggleConnectionsInfoDisplay() {
     const connectionsInfoDisplay = !this.state.connectionsInfoDisplay;
     this.setState({ ...initialState, connectionsInfoDisplay });
   }
 
+  renderToolbar(): JSX.Element {
+    return <div id="toolbar">
+        <button onClick={this.reset}>
+          Reset
+        </button>
+        <button id="view-switcher" onClick={this.toggleConnectionsInfoDisplay}>
+          View
+        </button>
+      </div>
+  }
+
+  renderUI(): JSX.Element {
+    // Display table of connection contents when active
+    if (this.state.connectionsInfoDisplay) {
+      return ConnectionsInfo();
+    }
+
+    // Display result view when calculation has been done
+    if(this.state.bestResult) {
+      return <ResultView
+        result={this.state.bestResult} />
+        
+    }
+
+    return <GraphicalUI
+      siteA={this.state.siteA}
+      siteB={this.state.siteB}
+      calculate={this.calculate}
+      updateInputA={this.updateInputA}
+      updateInputB={this.updateInputB}
+      result={this.state.bestResult} />
+
+  }
+
   render() {
     return <div>
-      <div id="toolbar">
-        <button onClick={this.reset}>Reset</button>
-        <button style={{ marginLeft: "15px" }} onClick={this.toggleConnectionsInfoDisplay}>View</button>
-      </div>
+      {this.renderToolbar()}
       {this.renderUI()}
     </div>
   }

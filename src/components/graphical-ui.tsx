@@ -51,6 +51,7 @@ export class GraphicalUI extends React.Component<ComponentProps> {
 
     setSiteInfo(destination: Destination) {
         if(this.props.siteA) {
+            // Make sure the same destination isn't being selected twice
             if (this.props.siteB || destination === this.props.siteA) {
                 return;
             } else {
@@ -61,51 +62,34 @@ export class GraphicalUI extends React.Component<ComponentProps> {
         }
     }
 
+    // Render orb item with additional class for wide section of the octagon
+    renderSqueezeRowItem(d: Destination, extraClass?: string) {
+        return <div id={getOrbIdValue(Destination[d])}
+            className={this.getOrbClasses(Destination[d]) + " destination-orb " + extraClass}
+            onClick={() => this.setSiteInfo(Destination[d])}>{d}</div>
+    }
+
     render() {
-        // Octagon of orbs to choose from
+        // Octagon of destination orbs to choose from
         return <div id="graphical-pathfinder-container">
             <div className="squeeze-row">
-                <div id={getOrbIdValue(Destination.A)}
-                    className={this.getOrbClasses(Destination.A) + " destination-orb"}
-                    onClick={() => this.setSiteInfo(Destination.A)}>A</div>
-                    
-                <div id={getOrbIdValue(Destination.B)}
-                    className={this.getOrbClasses(Destination.B) + " destination-orb"}
-                    onClick={() => this.setSiteInfo(Destination.B)}>B</div>
-
+                {this.renderSqueezeRowItem(Destination.A)}
+                {this.renderSqueezeRowItem(Destination.B)}
             </div>
 
             <div className="loose-row">
-                <div id={getOrbIdValue(Destination.C)}
-                    className={this.getOrbClasses(Destination.C) + " destination-orb wide-left-section"}
-                    onClick={() => this.setSiteInfo(Destination.C)}>C</div>
-
-                <div id={getOrbIdValue(Destination.D)}
-                    className={this.getOrbClasses(Destination.D) + " destination-orb wide-right-section"}
-                    onClick={() => this.setSiteInfo(Destination.D)}>D</div>
-
+                {this.renderSqueezeRowItem(Destination.C, "wide-left-section")}
+                {this.renderSqueezeRowItem(Destination.D, "wide-right-section")}
             </div>
 
             <div className="loose-row">
-                <div id={getOrbIdValue(Destination.E)}
-                    className={this.getOrbClasses(Destination.E) + " destination-orb wide-left-section"}
-                    onClick={() => this.setSiteInfo(Destination.E)}>E</div>
-                    
-                <div id={getOrbIdValue(Destination.F)}
-                    className={this.getOrbClasses(Destination.F) + " destination-orb wide-right-section"}
-                    onClick={() => this.setSiteInfo(Destination.F)}>F</div>
-
+                {this.renderSqueezeRowItem(Destination.E, "wide-left-section")}
+                {this.renderSqueezeRowItem(Destination.F, "wide-right-section")}
             </div>
 
             <div className="squeeze-row">
-                <div id={getOrbIdValue(Destination.G)}
-                    className={this.getOrbClasses(Destination.G) + " destination-orb"}
-                    onClick={() => this.setSiteInfo(Destination.G)}>G</div>
-
-                <div id={getOrbIdValue(Destination.H)}
-                    className={this.getOrbClasses(Destination.H) + " destination-orb"}
-                    onClick={() => this.setSiteInfo(Destination.H)}>H</div>
-
+                {this.renderSqueezeRowItem(Destination.G)}
+                {this.renderSqueezeRowItem(Destination.H)}
             </div>
         </div>
     }
